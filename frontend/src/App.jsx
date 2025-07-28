@@ -22,7 +22,7 @@ import Aboutus from "./Pages/aboutus";
 import Privacypolicy from "./Pages/Privacypolicy";
 import TermsConditions from "./Pages/TermsConditions";
 import CategoryDetail from './pages/CategoryDetail';
-// import ProductDetail from './pages/ProductDetail';
+import ProductDetail from './pages/ProductDetail';
 import ThemeProducts from "./Pages/ThemeProducts";
 import CategoryProducts from "./Pages/CategoryProducts";
 import ProductList from "./Pages/ProductList";

@@ -5,10 +5,10 @@ const validateRequest = require("../_middleware/validate-request.js");
 const contactService = require("./contact.service.js");
 
 // Routes
-router.post("/", contactSchema, createContact);
-router.get("/", getAllContacts);
-router.delete("/:id", getByIdDelete);
-router.put("/:id", contactSchema, updateById);
+router.post("/api/v1/", contactSchema, createContact);
+router.get("/api/v1/", getAllContacts);
+router.delete("/api/v1/:id", getByIdDelete);
+router.put("/api/v1/:id", contactSchema, updateById);
 
 module.exports = router;
 

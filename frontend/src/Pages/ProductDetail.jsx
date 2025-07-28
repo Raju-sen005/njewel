@@ -36,7 +36,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchSizes = async () => {
             try {
-                const response = await axios.get("http://localhost:8000/size"); // 🔁 Your backend URL
+                const response = await axios.get("http://localhost:8000/size/api/v1/"); // 🔁 Your backend URL
                 setSizes(response.data);
             } catch (error) {
                 console.error("Error fetching sizes:", error);
@@ -49,7 +49,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchMetals = async () => {
             try {
-                const response = await axios.get("http://localhost:8000/material"); // ✅ Your backend API route
+                const response = await axios.get("http://localhost:8000/material/api/v1/"); // ✅ Your backend API route
                 setMetals(response.data);
             } catch (error) {
                 console.error("Error fetching metals:", error);
@@ -61,7 +61,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchGemstones = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/gemstone"); // ✅ Replace with your actual API URL
+                const res = await axios.get("http://localhost:8000/gemstone/api/v1/"); // ✅ Replace with your actual API URL
                 setGemstones(res.data);
             } catch (err) {
                 console.error("Error fetching gemstones:", err);
@@ -156,46 +156,48 @@ const ProductDetail = () => {
                     <div>
                         <h4 className="font-semibold mb-2">Gemstones</h4>
                         <ul className="flex flex-wrap gap-2">
-                            {gemstones.map((gem) => (
+                            {gemstones.map((gem, index) => (
                                 <li
-                                    key={gem._id}
+                                    key={gem._id || index}
                                     onClick={() => handleGemClick(gem._id)}
                                     className={`px-4 py-2 border rounded cursor-pointer 
-              ${selectedGem === gem._id ? 'border-pink-500 text-black' : 'hover:text-blue-600'}`}
+        ${selectedGem === gem._id ? 'border-pink-500 text-black' : 'hover:text-blue-600'}`}
                                 >
                                     {gem.gemstone}
                                 </li>
                             ))}
                         </ul>
+
                     </div>
 
                     {/* Material */}
                     <div>
                         <h4 className="font-semibold mb-2">Metal</h4>
                         <ul className="flex flex-wrap gap-2">
-                            {metals.map((metal) => (
+                            {metals.map((metal, index) => (
                                 <li
-                                    key={metal._id}
+                                    key={metal._id || index}
                                     onClick={() => handleMetalClick(metal._id)}
                                     className={`px-3 py-1 border rounded cursor-pointer w-[10%] text-center hover:bg-gray-100
-              ${selectedMetal === metal._id ? 'border-pink-500 text-black font-semibold' : 'hover:text-black'}`}
+        ${selectedMetal === metal._id ? 'border-pink-500 text-black font-semibold' : 'hover:text-black'}`}
                                 >
                                     {metal.name}
                                 </li>
                             ))}
                         </ul>
+
                     </div>
 
                     {/* Size */}
                     <div>
                         <h4 className="font-semibold mb-2">Size</h4>
                         <ul className="flex gap-2 flex-wrap">
-                            {sizes.map((size) => (
+                            {sizes.map((size, index) => (
                                 <li
-                                    key={size._id}
+                                    key={size._id || index}
                                     onClick={() => handleSizeClick(size.size)}
                                     className={`px-3 py-1 border rounded cursor-pointer 
-              ${selectedSize === size.size ? 'bg-pink-500 text-white' : 'hover:text-blue-600'}`}
+        ${selectedSize === size.size ? 'bg-pink-500 text-white' : 'hover:text-blue-600'}`}
                                 >
                                     {size.size}
                                 </li>

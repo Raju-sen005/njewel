@@ -7,20 +7,20 @@ const Role = require('../_helpers/role.js');
 const accountService = require('./account.service.js');
 
 // routes
-router.post('/authenticate', authenticateSchema, authenticate);
-router.post('/refresh-token', refreshToken);
-router.post('/revoke-token', authorize(), revokeTokenSchema, revokeToken);
-router.post('/register', registerSchema, register);
-router.get('/verify-email', verifyEmailSchema, verifyEmail);
-router.post('/forgot-password', forgotPasswordSchema, forgotPassword);
-router.post('/validate-reset-token', validateResetTokenSchema, validateResetToken);
-router.post('/reset-password', resetPasswordSchema, resetPassword);
-router.get('/', authorize(), getAll);//admin
+router.post('/api/v1/authenticate', authenticateSchema, authenticate);
+router.post('/api/v1/refresh-token', refreshToken);
+router.post('/api/v1/revoke-token', authorize(), revokeTokenSchema, revokeToken);
+router.post('/api/v1/register', registerSchema, register);
+router.get('/api/v1/verify-email', verifyEmailSchema, verifyEmail);
+router.post('/api/v1/forgot-password', forgotPasswordSchema, forgotPassword);
+router.post('/api/v1/validate-reset-token', validateResetTokenSchema, validateResetToken);
+router.post('/api/v1/reset-password', resetPasswordSchema, resetPassword);
+router.get('/api/v1/', authorize(), getAll);//admin
 // create update get delete
-router.get('/:id', authorize(), getById);
-router.post('/', authorize(), createSchema, create);//admin
-router.put('/:id', authorize(), updateSchema, update);
-router.delete('/:id', authorize(), _delete);
+router.get('/api/v1/:id', authorize(), getById);
+router.post('/api/v1/', authorize(), createSchema, create);//admin
+router.put('/api/v1/:id', authorize(), updateSchema, update);
+router.delete('/api/v1/:id', authorize(), _delete);
 
 module.exports = router;
 

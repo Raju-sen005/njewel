@@ -10,7 +10,7 @@ const ProductList = () => {
         const fetchProducts = async () => {
             const query = location.search; // ?type=xyz
             try {
-                const res = await fetch(`http://localhost:8000/products${query}`);
+                const res = await fetch(`http://localhost:8000/products/api/v1/${query}`);
                 const data = await res.json();
                 setProducts(data);
             } catch (err) {

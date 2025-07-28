@@ -8,11 +8,11 @@ const Role = require("../_helpers/role.js");
 const orderService = require("./orders.service.js");
 
 // routes
-router.post("/", authorize(), createOrderSchema, createOrder);
-router.put("/:id", authorize(), updateOrderSchema, updateOrder);
-router.delete("/:id", authorize(), deleteOrder); //admin
-router.get("/", authorize(), getAllOrders);
-router.get("/:id", authorize(), getOrderById);
+router.post("/api/v1/", authorize(), createOrderSchema, createOrder);
+router.put("/api/v1/:id", authorize(), updateOrderSchema, updateOrder);
+router.delete("/api/v1/:id", authorize(), deleteOrder); //admin
+router.get("/api/v1/", authorize(), getAllOrders);
+router.get("/api/v1/:id", authorize(), getOrderById);
 
 // export
 module.exports = router;

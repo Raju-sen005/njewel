@@ -21,8 +21,8 @@ function Header({ searchTerm, setSearchTerm }) {
     const fetchData = async () => {
         try {
             const [categoriesRes, themesRes] = await Promise.all([
-                fetch("http://localhost:8000/category"),
-                fetch("http://localhost:8000/theme")
+                fetch("http://localhost:8000/category/api/v1/"),
+                fetch("http://localhost:8000/theme/api/v1/")
             ]);
             setCategories(await categoriesRes.json());
             setThemes(await themesRes.json());
@@ -34,10 +34,10 @@ function Header({ searchTerm, setSearchTerm }) {
     const fetchCategoryDetails = async (categoryId) => {
         try {
             const [purposeRes, typeRes, themeRes, gemstoneRes] = await Promise.all([
-                fetch(`http://localhost:8000/purpose?categoryId=${categoryId}`),
-                fetch(`http://localhost:8000/subcategory?categoryId=${categoryId}`),
-                fetch(`http://localhost:8000/theme?categoryId=${categoryId}`),
-                fetch(`http://localhost:8000/gemstone?categoryId=${categoryId}`)
+                fetch(`http://localhost:8000/purpose/api/v1/?categoryId=${categoryId}`),
+                fetch(`http://localhost:8000/subcategory/api/v1/?categoryId=${categoryId}`),
+                fetch(`http://localhost:8000/theme/api/v1/?categoryId=${categoryId}`),
+                fetch(`http://localhost:8000/gemstone/api/v1/?categoryId=${categoryId}`)
             ]);
             setPurposes(await purposeRes.json());
             setTypes(await typeRes.json());

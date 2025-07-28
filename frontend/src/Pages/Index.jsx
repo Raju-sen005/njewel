@@ -15,6 +15,7 @@ const Index = () => {
   let [allProducts, setallProducts] = useState([])
   const [currentVideo, setCurrentVideo] = useState(0);
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
   const settings = {
     dots: true,
     infinite: true,
@@ -74,7 +75,7 @@ const Index = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${url}/products`);
+        const response = await fetch(`${url}/products/api/v1/`);
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -477,7 +478,7 @@ const Index = () => {
                         <div className="relative h-full">
                           {themes.map((theme, index) => (
                             <div
-                              key={theme.id}
+                              key={index}
                               style={calculateStyles(index)}
                               className="shadow-lg rounded-lg overflow-hidden"
                             >
@@ -489,7 +490,9 @@ const Index = () => {
                               />
                             </div>
                           ))}
+
                         </div>
+
 
                         <div className="absolute bottom-[10px] left-0 right-0 z-50">
                           <div className="flex justify-center items-center gap-2 backdrop-blur-sm py-2 px-3 sm:py-3 sm:px-4 rounded-full w-[95%] sm:w-[85%] md:w-fit mx-auto">
