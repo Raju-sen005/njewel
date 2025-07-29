@@ -1,10 +1,13 @@
 import React from 'react'
-
+import Header from '../Components/Header'
+import Footer from '../Components/Footer'
 function Privacypolicy() {
  return (
+  <>
+  <Header />
     <div className="min-h-screen bg-gray-50 text-gray-800">
       {/* Hero Section */}
-      <div className="relative h-[300px] bg-black flex items-center justify-center text-white">
+      <div className="relative h-[300px] bg-black flex items-center justify-center text-white" style={{ top:"200px" }}>
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight animate-fade-in">
             Privacy Policy
@@ -16,7 +19,7 @@ function Privacypolicy() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" style={{position:"relative",top:"200px", marginBottom:"200px"}}>
         <div className="bg-white shadow-lg rounded-lg p-6 md:p-10">
           <section className="mb-8">
             <p className="text-gray-700 leading-relaxed">
@@ -204,6 +207,9 @@ function Privacypolicy() {
 
 
     </div>
+    <Footer />
+  </>
+
   )
 }
 
