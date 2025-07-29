@@ -213,7 +213,7 @@ function Footer() {
 
                                                 className=" text-[#B0B0B0] hover:text-[#fff] border-b text-[12px] sm:text-[16px]"
                                             >
-                                                FAQ
+                                                Terms & Conditions
                                             </Link>
                                         </li>
                                         <li>
@@ -221,7 +221,7 @@ function Footer() {
 
                                                 className=" text-[#B0B0B0] hover:text-[#fff] border-b text-[12px] sm:text-[16px]"
                                             >
-                                                Returns Policy
+                                                Privacy Policy
                                             </Link>
                                         </li>
                                     </ul>
