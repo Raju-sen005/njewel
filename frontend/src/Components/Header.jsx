@@ -540,7 +540,7 @@ function Header({ searchTerm, setSearchTerm }) {
                             <ShopByThemeDropdown />
 
                             <li><Link to="/custom-jewelry" className="hover:text-black">CUSTOM JEWELRY</Link></li>
-                            <li><Link to="#" className="hover:text-black">ABOUT US</Link></li>
+                            <li><Link to="/about-us" className="hover:text-black">ABOUT US</Link></li>
                             <li><Link to="/contact" className="hover:text-black">CONTACT US</Link></li>
                             <li><Link to="#" className="hover:text-black">BLOG</Link></li>
                         </ul>

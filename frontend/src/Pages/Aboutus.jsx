@@ -1,5 +1,6 @@
 import React from 'react'
-// import story from "/assets/story-web.webp"
+import story from "./images/Beach-&-Nautical Style.png"
+import ourpromise from "./images/story-web.webp"
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 function Aboutus() {
@@ -58,7 +59,7 @@ style={{ top:"200px" }}
               Each piece is customizable and personalizable. You can add your birthstone, engravings,
               or other meaningful elements to make it truly yours.
             </p>
-            {/* <img src={story} alt="Unique Jewelry" className="rounded-xl shadow-lg w-full mt-8" /> */}
+            <img src={story} alt="Unique Jewelry" className="rounded-xl shadow-lg w-full mt-8" />
           </div>
         </section>
 
@@ -128,7 +129,7 @@ style={{ top:"200px" }}
             </div>
 
             <div>
-              {/* <img src={story} alt="" /> */}
+              <img src={ourpromise} alt="" />
             </div>
           </div>
         </section>
