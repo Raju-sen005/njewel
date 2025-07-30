@@ -96,11 +96,9 @@ const CustomJel = () => {
                       <span className="bg-brown-500 p-2 rounded-full">
                         <img src={contact.icon} alt="icon" />
                       </span>
-                      <p className="text-[#B0B0B0]" style={{
-                        position: "absolute",
-                        width: "13%",
-                        left: "25%"
-                      }}>{contact.text}</p>
+                      <p
+                        className="text-[#B0B0B0] absolute left-[25%] md:left-[25%] w-[55%] md:w-[13%]"
+                      >{contact.text}</p>
                     </div>
                   ))}
                 </div>
