@@ -56,9 +56,9 @@ const CustomJel = () => {
   });
   //contact
   const contactDetails = [
-    { id: 1, icon: "icons/Frame 283.png", text: "+62 00-000-00" },
-    { id: 2, icon: "icons/Frame 284.png", text: "support@manstyle.com" },
-    { id: 3, icon: "icons/Frame 285.png", text: "Washington DC, USA" },
+    { id: 1, icon: "icons/Frame 283.png", text: "+91-8824284631" },
+    { id: 2, icon: "icons/Frame 284.png", text: "support@vinstonedesigns.com" },
+    { id: 3, icon: "icons/Frame 285.png", text: "Vinston Designs LLC 30 N Gould St #42530 Sheridan, WY 82801 United States" },
   ];
   //
   return (
@@ -96,7 +96,11 @@ const CustomJel = () => {
                       <span className="bg-brown-500 p-2 rounded-full">
                         <img src={contact.icon} alt="icon" />
                       </span>
-                      <p className="text-[#B0B0B0]">{contact.text}</p>
+                      <p className="text-[#B0B0B0]" style={{
+                        position: "absolute",
+                        width: "13%",
+                        left: "25%"
+                      }}>{contact.text}</p>
                     </div>
                   ))}
                 </div>
@@ -182,14 +186,14 @@ const CustomJel = () => {
                   </div>
 
                   <div>
-                     <label className="block text-[#121212] mb-2">Here you can attach any photo</label>
-                    <input  className="w-full border border-[#B0B0B0] p-2 rounded" type="file"  name="" id="" />
+                    <label className="block text-[#121212] mb-2">Here you can attach any photo</label>
+                    <input className="w-full border border-[#B0B0B0] p-2 rounded" type="file" name="" id="" />
                   </div>
 
-                  
+
                   <div>
-                     <label className="block text-[#121212] mb-2">Here you can attach a link</label>
-                    <input  className="w-full border border-[#B0B0B0] p-2 rounded" type="url"  name="" id="" />
+                    <label className="block text-[#121212] mb-2">Here you can attach a link</label>
+                    <input className="w-full border border-[#B0B0B0] p-2 rounded" type="url" name="" id="" />
                   </div>
 
                   {/* Submit Button */}

@@ -51,9 +51,9 @@ const Contact = () => {
   });
   //contact
   const contactDetails = [
-    { id: 1, icon: "icons/Frame 283.png", text: "+62 00-000-00" },
-    { id: 2, icon: "icons/Frame 284.png", text: "support@manstyle.com" },
-    { id: 3, icon: "icons/Frame 285.png", text: "Washington DC, USA" },
+    { id: 1, icon: "icons/Frame 283.png", text: "+91-8824284631" },
+    { id: 2, icon: "icons/Frame 284.png", text: "support@vinstonedesigns.com" },
+    { id: 3, icon: "icons/Frame 285.png", text: "Vinston Designs LLC 30 N Gould St #42530 Sheridan, WY 82801 United States" },
   ];
   //
   return (
@@ -91,7 +91,11 @@ const Contact = () => {
                       <span className="bg-brown-500 p-2 rounded-full">
                         <img src={contact.icon} alt="icon" />
                       </span>
-                      <p className="text-[#B0B0B0]">{contact.text}</p>
+                      <p className="text-[#B0B0B0]" style={{
+                        position: "absolute",
+                        width: "13%",
+                        left: "25%"
+                      }}>{contact.text}</p>
                     </div>
                   ))}
                 </div>
