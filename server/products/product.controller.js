@@ -9,17 +9,17 @@ const upload = require("../_middleware/upload.js");
 
 // routes
 router.post(
-  "/api/v1/",
+  "/",
   authorize(Role.Admin), // Admin only
   upload.any(), // Accepts all variant images
   createProduct
 );
 
-router.put("/api/v1/:id", authorize(Role.Admin), upload.any(), updateProduct);
+router.put("/:id", authorize(Role.Admin), upload.any(), updateProduct);
 
-router.delete("/api/v1/:id", authorize(Role.Admin), deleteProduct);
-router.get("/api/v1/", getAllProducts);
-router.get("/api/v1/:id", getProductById); // changed PATCH -> GET for standard REST
+router.delete("/:id", authorize(Role.Admin), deleteProduct);
+router.get("/", getAllProducts);
+router.get("/:id", getProductById); // changed PATCH -> GET for standard REST
 
 module.exports = router;
 

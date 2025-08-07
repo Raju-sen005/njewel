@@ -7,6 +7,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@fancyapps/ui": "^6.0.21",
     "ansi-regex": "^5.0.1",
     "ansi-styles": "^4.3.0",
     "chalk": "^4.1.2",
@@ -19,7 +20,9 @@
     "has-flag": "^4.0.0",
     "is-fullwidth-code-point": "^3.0.0",
     "lodash": "^4.17.21",
+    "multer": "^2.0.2",
     "react-slick": "^0.30.3",
+    "react-swipeable": "^7.0.2",
     "require-directory": "^2.1.1",
     "rxjs": "^7.8.2",
     "shell-quote": "^1.8.3",
@@ -35,7 +38,7 @@
     "yargs-parser": "^21.1.1"
   },
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix adminpanel\" \"npm run dev --prefix server\""
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix admin\" \"npm run dev --prefix server\""
   },
   "keywords": [],
   "author": "",

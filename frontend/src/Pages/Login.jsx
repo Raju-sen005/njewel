@@ -29,7 +29,7 @@ const Login = () => {
     },
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        const response = await fetch(`${url}/api/v1/authenticate`, {
+        const response = await fetch(`${url}/authenticate`, {
           method: 'POST',
           headers: {
             accept: 'application/json',

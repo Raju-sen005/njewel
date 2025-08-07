@@ -6,7 +6,7 @@ import { useCart } from '../CartContext.jsx';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 import Footer from '../Components/Footer.jsx';
-import TopPicks from '../Components/TopPicks.jsx';
+// import TopPicks from '../Components/TopPicks.jsx';
 import Cookies from 'js-cookie';
 
 const Cart = () => {
@@ -153,6 +153,34 @@ const Cart = () => {
     }
   };
 
+  const getImage = (imgData) => {
+    try {
+      const arr = typeof imgData === "string" ? JSON.parse(imgData) : imgData;
+      return Array.isArray(arr) && arr.length > 0 ? arr[0] : null;
+    } catch (err) {
+      return null;
+    }
+  };
+  // Get the price by index (or first if no index)
+  const getPrice = (priceData, index = 0) => {
+    try {
+      const arr = typeof priceData === "string" ? JSON.parse(priceData) : priceData;
+      return Array.isArray(arr) && arr.length > index ? arr[index] : null;
+    } catch (err) {
+      return null;
+    }
+  };
+
+  // Get the size by index (or first if no index)
+  const getSize = (sizeData, index = 0) => {
+    try {
+      const arr = typeof sizeData === "string" ? JSON.parse(sizeData) : sizeData;
+      return Array.isArray(arr) && arr.length > index ? arr[index] : null;
+    } catch (err) {
+      return null;
+    }
+  };
+
   return (
     <div className='pt-[150px]'>
 
@@ -177,13 +205,23 @@ const Cart = () => {
                   {cartItems.map((item) => (
                     <tr key={item.id}>
                       <td className="p-4 flex items-center space-x-4">
-                        <img src={url + "/uploads/" + item?.images[0]} alt={item.title} className="w-16 h-16" />
+                        <img
+                          src={
+                            getImage(item.images)
+                              ? `${url}/uploads/${getImage(item.images)}`
+                              : "/placeholder.jpg"
+                          }
+                          alt={item.title || "Product Image"}
+                          className="w-16 h-16 object-cover rounded"
+                        />
+
                         <div>
                           <p className="font-semibold text-[#5B3E38]">{item.title}</p>
                         </div>
                       </td>
-                      <td className="p-4 font-bold text-[20px]">${item.price}</td>
-                      <td className="p-4 font-bold text-[20px]">{item.sizes}</td>
+                      <td className="p-4 font-bold text-[20px]">${getPrice(item.price)}</td>
+                      <td className="p-4 font-bold text-[20px]">{getSize(item.sizes)}</td>
+
                       <td className="p-4">
                         <div className="flex items-center">
                           <button onClick={() => updateQuantity(item, "decrease")} className="px-2 py-1 border">-</button>
@@ -206,7 +244,15 @@ const Cart = () => {
               <h1 className="text-2xl font-bold mb-6">MY CART ({cartItems.length})</h1>
               {cartItems.map((item) => (
                 <div key={item.id} className="flex items-center space-x-4 border-b pb-4 mb-4">
-                  <img src={item.thumbnail} alt={item.title} className="w-24 h-24 rounded-lg object-cover" />
+                  <img
+                    src={
+                      getImage(item.images)
+                        ? `${url}/uploads/${getImage(item.images)}`
+                        : "/placeholder.jpg"
+                    }
+                    alt={item.title || "Product Image"}
+                    className="w-16 h-16 object-cover rounded"
+                  />
                   <div className="flex-1">
                     <h2 className="font-semibold text-lg">{item.title}</h2>
                     <div className="flex items-center mt-2">
@@ -363,7 +409,7 @@ const Cart = () => {
             </div>
           </section>
           {/* toop picks */}
-          <TopPicks products={similarProducts} />
+          {/* <TopPicks products={similarProducts} /> */}
 
         </>
 

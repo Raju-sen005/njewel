@@ -5,10 +5,10 @@ const validateRequest = require("../_middleware/validate-request.js");
 const categoryService = require("./category.service.js");
 
 // Routes
-router.post("/api/v1/", categorySchema, createcategory);
-router.get("/api/v1/", getAllcategorys);
-router.delete("/api/v1/:id", getByIdDelete);
-router.put("/api/v1/:id", categorySchema, updateById);
+router.post("/", categorySchema, createcategory);
+router.get("/", getAllcategorys);
+router.delete("/:id", getByIdDelete);
+router.put("/:id", categorySchema, updateById);
 
 module.exports = router;
 

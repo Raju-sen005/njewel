@@ -1,150 +1,188 @@
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../CartContext";
-import { useState, useEffect } from "react";
+import { useWishlist } from "../WishlistContext";
+import { useState } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const ProductGrid = ({ products }) => {
-    const url = import.meta.env.VITE_BACKEND_URL;
-
-    const { addToCart } = useCart();
-    const [selectedSizes, setSelectedSizes] = useState({});
-    const [selectedMetals, setSelectedMetals] = useState({});
-    const [mainImages, setMainImages] = useState({});
-    const [errorMessages, setErrorMessages] = useState({});
-    const [currentPrices, setCurrentPrices] = useState({});
+    const [liked, setLiked] = useState(false);
+    const [quantity, setQuantity] = useState(1);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const navigate = useNavigate();
+    const { addToCart } = useCart();
+    const { addToWishlist } = useWishlist();
 
-    useEffect(() => {
-        const initialMetals = {};
-        const initialPrices = {};
+    const url = import.meta.env.VITE_BACKEND_URL;
 
-        products.forEach(variant => {
-            if (Array.isArray(variant.metal) && variant.metal.length > 0) {
-                initialMetals[variant.id] = variant.metal[0];
-                initialPrices[variant.id] = variant.price?.[0] || 0;
-            }
-        });
-
-        setSelectedMetals(initialMetals);
-        setCurrentPrices(initialPrices);
-    }, [products]);
-
-    const handleThumbnailClick = (variantId, image) => {
-        setMainImages(prev => ({ ...prev, [variantId]: image }));
-    };
-
-    const handleSizeSelect = (variantId, e) => {
-        const size = e.target.value;
-        setSelectedSizes(prev => ({ ...prev, [variantId]: size }));
-        setErrorMessages(prev => ({ ...prev, [variantId]: null }));
-    };
-
-    const handleMetalSelect = (variantId, metal) => {
-        const variant = products.find(p => p.id === variantId);
-
-        if (variant) {
-            setSelectedMetals(prev => ({ ...prev, [variantId]: metal }));
-
-            const metalIndex = variant.metal.indexOf(metal);
-
-            if (metalIndex !== -1 && variant.price && variant.price[metalIndex] !== undefined) {
-                setCurrentPrices(prev => ({ ...prev, [variantId]: variant.price[metalIndex] }));
-            }
+    const parseJSON = (data) => {
+        try {
+            return typeof data === "string" ? JSON.parse(data) : data;
+        } catch {
+            return data;
         }
     };
 
-    const handleAddToCart = (variant) => {
-        if (!selectedSizes[variant.id] && variant.sizes?.length > 0) {
-            setErrorMessages(prev => ({ ...prev, [variant.id]: "Please select a size" }));
-            return;
-        }
+    const handleQuantityChange = (type) => {
+        setQuantity((prev) => (type === 'inc' ? prev + 1 : Math.max(prev - 1, 1)));
+    };
 
-        const metalIndex = variant.metals?.indexOf(selectedMetals[variant.id]) || 0;
-        const price = variant.prices?.[metalIndex] || 0;
+    const handleLike = (product) => {
+        addToWishlist(product);
+    };
 
-        addToCart(
-            variant.productId,
-            variant.id,
-            selectedSizes[variant.id] || null,
-            1,
-            price,
-            variant.title,
-            Array.isArray(variant.images) ? variant.images[0] : variant.images,
-            selectedMetals[variant.id] || null
-        );
+    const handleView = (product) => {
+        setSelectedProduct(product);
+        setQuantity(1);
+    };
+
+    const handleClosePopup = () => {
+        setSelectedProduct(null);
+        setQuantity(1);
+        setLiked(false);
     };
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:ml-[200px]">
-            {products && products.map((variant) => {
-                const images = Array.isArray(variant.images) ? variant.images : [variant.images];
-                const currentMainImage = mainImages[variant.id] || images[0];
-                const errorMessage = errorMessages[variant.id];
-                const currentPrice = currentPrices[variant.id] || 0;
+        <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {products.map((variant) => {
+                    const images = parseJSON(variant.images) || [];
+                    const priceArray = parseJSON(variant.price) || [];
+                    const price = Array.isArray(priceArray) ? priceArray[0] : priceArray;
+                    const discountPercent = 15;
+                    const originalPrice = Math.round(price + (price * discountPercent) / 100);
 
-                return (
-                    <div
-                        key={variant.id}
-                        className="relative p-4 bg-white shadow-lg rounded-lg cursor-pointer hover:shadow-xl transition"
-                        onClick={() => navigate(`/product/${variant.productId}/${variant.id}`)}
-                    >
-                        {/* Product Image */}
-                        <div className="block bg-[#F6F4F0] h-[350px] overflow-hidden rounded-lg">
-                            <img
-                                alt={variant.title}
-                                className="h-full w-full object-cover bg-[#E9E2D8] rounded-lg"
-                                src={url + "/uploads/" + currentMainImage}
-                            />
-                        </div>
+                    return (
+                        <div
+                            key={variant.id}
+                            className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden relative"
+                        >
+                            <div className="absolute top-2 right-2 z-10 flex gap-2">
+                                <button
+                                    className="bg-white w-10 h-10 flex items-center justify-center rounded-full shadow hover:scale-105 transition"
+                                    onClick={() => handleLike(variant)}
+                                >
+                                    <i className="bi bi-heart text-lg"></i>
+                                </button>
 
-                        <div className="mt-4">
-                            {/* Image Thumbnails */}
-                            {images.length > 0 && (
-                                <div className="flex space-x-2 my-2">
-                                    {images.slice(0, 3).map((image, index) => (
-                                        <img
-                                            key={index}
-                                            src={url + "/uploads/" + image}
-                                            alt={variant.title}
-                                            className={`w-10 h-10 rounded-md border cursor-pointer ${
-                                                currentMainImage === image ? 'border-[#AA8265] border-2' : 'border-gray-300'
-                                            }`}
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                handleThumbnailClick(variant.id, image);
-                                            }}
-                                        />
-                                    ))}
-                                </div>
-                            )}
-
-                            {/* Product Info */}
-                            {variant.rating > 4.5 && (
-                                <p className="text-sm text-red-600 font-semibold">BEST SELLER</p>
-                            )}
-                            <h2 className="text-lg font-bold text-gray-800">{variant.title}</h2>
-                            <p className="text-sm text-gray-600">{variant.description}</p>
-
-                            {/* Price Display */}
-                            <div className="mt-2">
-                                <p className="text-xl font-semibold text-gray-900">
-                                    {currentPrice.toLocaleString('id-ID', {
-                                        style: 'currency',
-                                        currency: 'IDR',
-                                        minimumFractionDigits: 0
-                                    })}
-                                </p>
+                                <button
+                                    className="bg-white w-10 h-10 flex items-center justify-center rounded-full shadow hover:scale-105 transition"
+                                    onClick={() => handleView(variant)}
+                                >
+                                    <i className="bi bi-eye text-lg"></i>
+                                </button>
                             </div>
 
-                            {/* Optional: Show error */}
-                            {errorMessage && (
-                                <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
-                            )}
+                            <Swiper
+                                pagination={{ clickable: true }}
+                                modules={[Pagination]}
+                                className="h-[300px] bg-[#F6F4F0]"
+                            >
+                                {images.slice(0, 5).map((img, index) => (
+                                    <SwiperSlide key={index}>
+                                        <img
+                                            src={`${url}/uploads/${img}`}
+                                            alt={variant.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+
+                            <div className="p-4">
+                                {variant.rating > 4.5 && (
+                                    <p className="text-sm text-red-600 font-semibold">BEST SELLER</p>
+                                )}
+                                <h2
+                                    className="text-lg font-bold text-gray-800 cursor-pointer"
+                                    onClick={() => navigate(`/product/${variant.productId}/${variant.id}`)}
+                                >
+                                    {variant.title}
+                                </h2>
+                                <p className="text-sm text-gray-600 mb-2">{variant.description}</p>
+                                <div className="flex items-center gap-2">
+                                    <p className="text-xl font-bold text-gray-900">
+                                        {price.toLocaleString("id-ID", {
+                                            style: "currency",
+                                            currency: "IDR",
+                                            minimumFractionDigits: 0,
+                                        })}
+                                    </p>
+                                    <p className="line-through text-gray-400 text-sm">
+                                        {originalPrice.toLocaleString("id-ID", {
+                                            style: "currency",
+                                            currency: "IDR",
+                                            minimumFractionDigits: 0,
+                                        })}
+                                    </p>
+                                    <span className="text-green-600 font-semibold text-sm">
+                                        {discountPercent}% OFF
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+
+            {selectedProduct && (
+                <div className="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center z-50">
+                    <div className="bg-white p-6 rounded-xl w-[90%] max-w-4xl relative grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <button
+                            onClick={handleClosePopup}
+                            className="absolute top-2 right-2 text-gray-600 text-xl"
+                        >✖</button>
+
+                        {/* Image Slider inside popup */}
+                        <Swiper
+                            pagination={{ clickable: true }}
+                            modules={[Pagination]}
+                            className="w-full h-80 rounded bg-gray-100"
+                        >
+                            {parseJSON(selectedProduct.images).map((img, index) => (
+                                <SwiperSlide key={index}>
+                                    <img
+                                        src={`${url}/uploads/${img}`}
+                                        alt={`Image ${index + 1}`}
+                                        className="w-full h-80 object-cover rounded"
+                                    />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+
+                        <div className="flex flex-col justify-between">
+                            <div>
+                                <h2 className="text-2xl font-bold mb-2">{selectedProduct.title}</h2>
+                                <p className="text-gray-600 mb-3">{selectedProduct.description}</p>
+                                <p className="text-lg font-semibold text-gray-900 mb-2">
+                                    {parseJSON(selectedProduct.price)[0].toLocaleString('id-ID', {
+                                        style: 'currency',
+                                        currency: 'IDR',
+                                        minimumFractionDigits: 0,
+                                    })}
+                                </p>
+
+                                <div className="flex items-center gap-3 mb-4">
+                                    <button onClick={() => handleQuantityChange('dec')} className="bg-gray-200 w-8 h-8 rounded">−</button>
+                                    <span className="text-lg">{quantity}</span>
+                                    <button onClick={() => handleQuantityChange('inc')} className="bg-gray-200 w-8 h-8 rounded">+</button>
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={() => addToCart(selectedProduct, quantity)}
+                                className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                            >
+                                Add to Cart
+                            </button>
                         </div>
                     </div>
-                );
-            })}
-        </div>
+                </div>
+            )}
+        </>
     );
 };
 

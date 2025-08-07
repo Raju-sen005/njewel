@@ -8,7 +8,7 @@ const ThemeProducts = () => {
   useEffect(() => {
     const fetchFilteredProducts = async () => {
       try {
-        const res = await fetch("http://localhost:8000/products/api/v1/");
+        const res = await fetch("http://localhost:8000/products/");
         const data = await res.json();
 
         const filtered = data.filter(

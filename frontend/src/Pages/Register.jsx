@@ -66,7 +66,7 @@ const Register = () => {
     onSubmit: async (values) => {
       setIsSubmitting(true);
       try {
-        const response = await fetch(`${url}/api/v1/register`, {
+        const response = await fetch(`${url}/register`, {
           method: 'POST',
           headers: {
             accept: 'application/json',

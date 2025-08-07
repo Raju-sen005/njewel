@@ -36,7 +36,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchSizes = async () => {
             try {
-                const response = await axios.get("http://localhost:8000/size/api/v1/"); // 🔁 Your backend URL
+                const response = await axios.get("http://localhost:8000/size"); // 🔁 Your backend URL
                 setSizes(response.data);
             } catch (error) {
                 console.error("Error fetching sizes:", error);
@@ -49,7 +49,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchMetals = async () => {
             try {
-                const response = await axios.get("http://localhost:8000/material/api/v1/"); // ✅ Your backend API route
+                const response = await axios.get("http://localhost:8000/material"); // ✅ Your backend API route
                 setMetals(response.data);
             } catch (error) {
                 console.error("Error fetching metals:", error);
@@ -61,7 +61,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchGemstones = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/gemstone/api/v1/"); // ✅ Replace with your actual API URL
+                const res = await axios.get("http://localhost:8000/gemstone"); // ✅ Replace with your actual API URL
                 setGemstones(res.data);
             } catch (err) {
                 console.error("Error fetching gemstones:", err);

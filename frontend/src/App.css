@@ -9,6 +9,7 @@
 }
 
 
+
 .contact-section {
   background-image: url(../bg-images/brown-fabrics-background\ 1.png);
   background-repeat: no-repeat;
@@ -74,7 +75,7 @@
   background-image: url(../img/section-3\ bg1.png);
   background-repeat: no-repeat;
   background-size: cover;
-height: 210px;
+  height: 210px;
 }
 
 .back2 {
@@ -101,31 +102,115 @@ height: 210px;
   background-size: cover;
 }
 
+/* If you're not using Tailwind's full custom config */
+.swiper-pagination-bullet {
+    background: #333 !important;
+    opacity: 0.6;
+}
+.swiper-pagination-bullet-active {
+    background: #000 !important;
+    opacity: 1;
+}
+
+
 
 
 
 @media (max-width:1244px) {
   .option {
-      display: none;
+    display: none;
   }
 
   .head-absolute {
-      position: absolute;
-      top: 84%;
-      right: 12%;
+    position: absolute;
+    top: 84%;
+    right: 12%;
   }
 
 }
 
 @media (max-width:992px) {
   .option {
-      display: none;
+    display: none;
   }
 
 }
 
 @media (max-width:440px) {
   .footer-section {
-      height: 272px;
+    height: 272px;
+  }
+}
+
+@media (max-width:426px) {
+  .section-bg {
+    height: 150px;
+    padding: 0px;
+  }
+
+  .shadow-lg {
+    width: 300px !important;
+    margin-left: -153px !important;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .Christmas {
+    height: 80%;
+    position: relative;
+    top: 33px;
+    width: 50%;
+    left: 70px;
+  }
+   .Halloween {
+    height: 80%;
+    position: relative;
+    top: 33px;
+    width: 50%;
+    left: 70px;
+  }
+  .Valentine {
+    height: 80%;
+    position: relative;
+    top: 33px;
+    width: 50%;
+    left: 70px;
+  }
+  .Mother {
+    height: 80%;
+    position: relative;
+    top: 33px;
+    width: 50%;
+    left: 70px;
+  }
+  .Easter {
+    height: 80%;
+    position: relative;
+    top: 33px;
+    width: 50%;
+    left: 70px;
+  }
+  .Thanks {
+    height: 80%;
+    position: relative;
+    top: 33px;
+    width: 50%;
+    left: 70px;
+  }
+  .bg-white{
+    width: 100% !important;
+    margin-left: 0px !important;
+  }
+  .pr{
+    margin-left: 0px !important;
+  }
+  .a-img{
+    margin: auto !important;
+    margin-top: 32px !important;
+  }
+  .l-box{
+    width: 65px !important;
   }
 }

@@ -8,6 +8,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ProductGrid from '../Components/Products';
 import JewelryShop from '../Components/Header';
+import ThemeSlider from './ThemeSlider';
+import Carousel from '../Components/Carousel';
 
 
 const Index = () => {
@@ -75,7 +77,7 @@ const Index = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${url}/products/api/v1/`);
+        const response = await fetch(`${url}/products/`);
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -123,7 +125,7 @@ const Index = () => {
           <div className="h-[120px] lg:block hidden" />
           <div className="h-[80px] lg:hidden block" />
 
-          <section className="body-font md:mt-20">
+          <section className="body-font md:mt-20 hidden lg:block">
             <div className="relative overflow-hidden">
               <div className="flex transition-transform duration-1000 ease-in-out"
                 style={{ transform: `translateX(-${currentVideo * 100}%)` }}
@@ -146,6 +148,7 @@ const Index = () => {
                     </div>
                   </div>
                 ))}
+
               </div>
               {/* Prev Button */}
               <button
@@ -176,6 +179,12 @@ const Index = () => {
               </div>
             </div>
           </section>
+
+          <div className="block lg:hidden">
+            <Carousel />
+          </div>
+
+
 
 
           <section className="section-bg body-font text-white lg:h-45 lg:pt-4 md:pb-8 sm:pb-6 py-7">
@@ -257,17 +266,18 @@ const Index = () => {
                       navigate("/product-detail", {
                         state: {
                           name: "Rings",
-                          image: "/n-image/Rings.jpg",
+                          image: "/n-image/Ring.jpeg",
                           description: "Elegant rings for all occasions", // optional
                         },
                       })
                     }
                   >
                     <img
-                      src="/n-image/Rings.jpg"
+                      src="/n-image/Ring.jpeg"
                       alt="Rings"
-                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 shadow-lg"
+                      className="w-full sm:w-[80%] h-64 object-cover transition-transform duration-500 group-hover:scale-105 m-auto"
                     />
+
                     <div>
                       <h3 className="text-center text-2xl font-semibold">Rings</h3>
                     </div>
@@ -280,21 +290,23 @@ const Index = () => {
                       navigate("/category-detail", {
                         state: {
                           name: "Rings",
-                          image: "/n-image/Charms.jpg",
+                          image: "/n-image/Charms.jpeg",
                           description: "Elegant rings for all occasions", // optional
                         },
                       })
                     }
                   >
                     <img
-                      src="/n-image/Charms.jpg"
+                      src="/n-image/Charms.jpeg"
                       alt="Rings"
-                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 shadow-lg"
+                      className="w-[72.5%] sm:w-[50.5%] h-64 object-cover transition-transform duration-500 group-hover:scale-105 m-auto"
                     />
+
                     <div>
                       <h3 className="text-center text-2xl font-semibold">Charms</h3>
                     </div>
                   </div>
+
                   {/* Category 3 */}
                   <div
                     className="category-box overflow-hidden group cursor-pointer"
@@ -311,12 +323,13 @@ const Index = () => {
                     <img
                       src="/n-image/Earrings.jpg"
                       alt="Rings"
-                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 shadow-lg"
+                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 "
                     />
                     <div>
                       <h3 className="text-center text-2xl font-semibold">Earrings</h3>
                     </div>
                   </div>
+
                   {/* Category 4 */}
                   <div
                     className="category-box overflow-hidden group cursor-pointer"
@@ -333,12 +346,13 @@ const Index = () => {
                     <img
                       src="/n-image/Bracelet.jpg"
                       alt="Rings"
-                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 shadow-lg"
+                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 "
                     />
                     <div>
                       <h3 className="text-center text-2xl font-semibold">Bracelet</h3>
                     </div>
                   </div>
+
                   {/* Category 5 */}
                   <div
                     className="category-box overflow-hidden group cursor-pointer"
@@ -346,17 +360,18 @@ const Index = () => {
                       navigate("/product-detail", {
                         state: {
                           name: "Rings",
-                          image: " /n-image/Necklaces.jpg",
+                          image: " /n-image/Necklace.jpeg",
                           description: "Elegant rings for all occasions", // optional
                         },
                       })
                     }
                   >
                     <img
-                      src="/n-image/Necklaces.jpg"
+                      src="/n-image/Necklace.jpeg"
                       alt="Rings"
-                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 shadow-lg"
+                      className="w-[70%] sm:w-[62.5%] h-64 object-cover transition-transform duration-500 group-hover:scale-105 m-auto"
                     />
+
                     <div>
                       <h3 className="text-center text-2xl font-semibold">Necklaces</h3>
                     </div>
@@ -378,7 +393,7 @@ const Index = () => {
                     <img
                       src="/n-image/New-Arrivals.jpg"
                       alt="Rings"
-                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 shadow-lg"
+                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div>
                       <h3 className="text-center text-2xl font-semibold">New Arrival</h3>
@@ -403,7 +418,7 @@ const Index = () => {
                 <div className="relative h-[450px] sm:h-[550px] md:h-[700px] lg:h-[900px]" style={{ zIndex: 10 }}>
                   {(() => {
                     const [activeIndex, setActiveIndex] = useState(0);
-                    const [radius, setRadius] = useState(1200); // Increased base radius
+                    const [radius, setRadius] = useState(1200);
 
                     const themes = [
                       { id: 1, image: "/n-image/01.jpg" },
@@ -413,8 +428,8 @@ const Index = () => {
                       { id: 5, image: "/n-image/05.jpg" },
                       { id: 6, image: "/n-image/06.jpg" },
                       { id: 7, image: "/n-image/07.jpg" },
-                      { id: 6, image: "/n-image/08.jpg" },
-                      { id: 7, image: "/n-image/09.jpg" },
+                      { id: 8, image: "/n-image/08.jpg" },
+                      { id: 9, image: "/n-image/09.jpg" },
                     ];
 
                     const theta = (2 * Math.PI) / themes.length;
@@ -423,9 +438,9 @@ const Index = () => {
                       const handleResize = () => {
                         const width = window.innerWidth;
                         if (width < 640) setRadius(300);
-                        else if (width < 768) setRadius(450); // Increased radius for sm
-                        else if (width < 1024) setRadius(800); // Increased radius for md
-                        else setRadius(1200); // Increased radius for lg
+                        else if (width < 768) setRadius(450);
+                        else if (width < 1024) setRadius(800);
+                        else setRadius(1200);
                       };
 
                       handleResize();
@@ -439,6 +454,7 @@ const Index = () => {
                       const z = radius * Math.cos(angle) - radius;
                       const scale = Math.max(0.6, (1500 + z) / 1500);
                       const opacity = Math.max(0.3, (1000 + z) / 1000);
+                      const blur = Math.abs(angle) > 0.1 ? "blur(5px)" : "none";
 
                       const getDimensions = () => {
                         if (window.innerWidth < 640) {
@@ -451,14 +467,11 @@ const Index = () => {
                         return { width: "580px", marginLeft: "-290px", marginTop: "-180px" };
                       };
 
-                      // Apply blur only to non-active items
-                      const blur = Math.abs(angle) > 0.1 ? "blur(5px)" : "none"; // Front item clear, others blurred
-
                       return {
                         transform: `perspective(1500px) translate3d(${x}px, 0, ${z}px) rotateY(${angle}rad) scale(${scale})`,
                         zIndex: Math.round(z + 1000),
                         opacity,
-                        filter: blur, // Apply blur effect
+                        filter: blur,
                         position: "absolute",
                         left: "50%",
                         top: "26%",
@@ -474,60 +487,35 @@ const Index = () => {
                     const goToPrev = () => setActiveIndex((prev) => (prev - 1 + themes.length) % themes.length);
 
                     return (
-                      <>
-                        <div className="relative h-full">
-                          {themes.map((theme, index) => (
-                            <div
-                              key={index}
-                              style={calculateStyles(index)}
-                              className="shadow-lg rounded-lg overflow-hidden"
-                            >
-                              <img
-                                src={theme.image}
-                                alt={`Theme ${index + 1}`}
-                                className="w-full h-full object-cover rounded-lg"
-                                loading="lazy"
-                              />
-                            </div>
-                          ))}
-
-                        </div>
-
-
-                        <div className="absolute bottom-[10px] left-0 right-0 z-50">
-                          <div className="flex justify-center items-center gap-2 backdrop-blur-sm py-2 px-3 sm:py-3 sm:px-4 rounded-full w-[95%] sm:w-[85%] md:w-fit mx-auto">
-                            <button
-                              className="bg-[#AA8265] cursor-pointer text-white w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center hover:bg-[#8A6A53] transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none shrink-0"
-                              onClick={goToPrev}
-                              aria-label="Previous theme"
-                            >
-                              <i className="bi bi-chevron-left text-xs sm:text-sm md:text-base"></i>
-                            </button>
-
-                            <div className="flex gap-1.5 sm:gap-2 md:gap-3 items-center flex-wrap justify-center">
-                              {themes.map((_, index) => (
-                                <button
-                                  key={index}
-                                  className={`w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 focus:outline-none shrink-0 ${activeIndex === index
-                                    ? "bg-[#AA8265] w-2 sm:w-3 md:w-4"
-                                    : "bg-[#D6C9BD] hover:bg-[#C0B0A3]"
-                                    }`}
-                                  onClick={() => setActiveIndex(index)}
-                                  aria-label={`Go to theme ${index + 1}`}
+                      <div className="container mx-auto">
+                        <div className="relative h-[450px] sm:h-[550px] md:h-[700px] lg:h-[900px]" style={{ zIndex: 10 }}>
+                          <div className="relative h-full">
+                            {themes.map((theme, index) => (
+                              <div
+                                key={index}
+                                style={calculateStyles(index)}
+                                className="shadow-lg rounded-lg overflow-hidden"
+                              >
+                                <img
+                                  src={theme.image}
+                                  alt={`Theme ${index + 1}`}
+                                  className="w-full h-full object-cover rounded-lg"
+                                  loading="lazy"
                                 />
-                              ))}
-                            </div>
-
-                            <button
-                              className="bg-[#AA8265] cursor-pointer text-white w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center hover:bg-[#8A6A53] transition-all duration-300 shadow-md hover:shadow-lg focus:outline-none shrink-0"
-                              onClick={goToNext}
-                              aria-label="Next theme"
-                            >
-                              <i className="bi bi-chevron-right text-xs sm:text-sm md:text-base"></i>
-                            </button>
+                              </div>
+                            ))}
                           </div>
+
+                          {/* ThemeSlider component call (pass correct props) */}
+                          <ThemeSlider
+                            themes={themes}
+                            activeIndex={activeIndex}
+                            setActiveIndex={setActiveIndex}
+                            goToPrev={goToPrev}
+                            goToNext={goToNext}
+                          />
                         </div>
-                      </>
+                      </div>
                     );
                   })()}
                 </div>
@@ -546,68 +534,73 @@ const Index = () => {
               </div>
 
               <div className="container mx-auto mt-10 mb-16">
-                <div className="grid grid-cols-1 md:grid-cols-1 gap-6  mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-6  mx-auto ">
                   {/* Office Wear */}
-                  <div className="relative bg-[#F0F0FF] rounded-lg p-6 flex items-center justify-between overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 min-h-[160px]">
-                    <div className="flex-1 z-10">
-                      <h3 className="text-2xl font-semibold text-[#5B3E38] mb-2">Office Wear</h3>
-                      <p className="text-[#855A49]">Dainty And Minimalist!</p>
-                    </div>
-                    <div className="w-1/3 absolute right-0 top-0 h-full flex items-center justify-center overflow-hidden">
-                      <img
-                        src="/n-image/Office-Wear.png"
-                        alt="Office Jewelry"
-                        className="w-full h-full object-contain transform transition-transform duration-300 hover:scale-110 cursor-pointer"
-                        onClick={() => navigate("/catalog-products")}
-                      />
-                    </div>
-                  </div>
+
+                  {/* Desktop image */}
+                  <img
+                    src="../images/wear-1.jpg"
+                    alt="Desktop Image"
+                    className="hidden md:block w-full shadow-lg rounded-lg mb-4"
+                  />
+
+                  {/* Mobile image */}
+                  <img
+                    src="../images/wear.m.1.jpg"
+                    alt="Mobile Image"
+                    className="block md:hidden w-full shadow-lg rounded-lg mb-4 mx-auto relative"
+                    style={{ left: "179px" }}
+                  />
 
                   {/* Daily Wear */}
-                  <div className="relative bg-[#FFF8F0] rounded-lg p-6 flex items-center justify-between overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 min-h-[160px]">
-                    <div className="flex-1 z-10">
-                      <h3 className="text-2xl font-semibold text-[#5B3E38] mb-2">Daily Wear</h3>
-                      <p className="text-[#855A49]">Comfort and Hypoallergenic</p>
-                    </div>
-                    <div className="w-1/3 absolute right-0 top-0 h-full flex items-center justify-center overflow-hidden">
-                      <img
-                        src="/n-image/Daily.png"
-                        alt="Daily Jewelry"
-                        className="w-full h-full object-contain transform transition-transform duration-300 hover:scale-110 cursor-pointer shadow-[0_0_10px_rgba(0,0,0,0.1),0_0_20px_rgba(0,0,0,0.08),0_0_30px_rgba(0,0,0,0.06),0_0_40px_rgba(0,0,0,0.04),0_0_50px_rgba(0,0,0,0.02)]"
-                        onClick={() => navigate("/catalog-products")}
-                      />
-                    </div>
-                  </div>
+                  {/* Desktop image */}
+                  <img
+                    src="../images/wear-2.jpg"
+                    alt="Desktop Image"
+                    className="hidden md:block w-full shadow-lg rounded-lg mb-4"
+                  />
+
+                  {/* Mobile image */}
+                  <img
+                    src="../images/wear.m.2.jpg"
+                    alt="Mobile Image"
+                    className="block md:hidden w-full shadow-lg rounded-lg mb-4 mx-auto relative"
+                    style={{ left: "179px" }}
+
+                  />
+
 
                   {/* Party Wear */}
-                  <div className="relative bg-[#F0F8FF] rounded-lg p-6 flex items-center justify-between overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 min-h-[160px] cursor-pointer" onClick={() => navigate("/catalog-products")}>
-                    <div className="flex-1 z-10">
-                      <h3 className="text-2xl font-semibold text-[#5B3E38] mb-2">Party Wear</h3>
-                      <p className="text-[#855A49]">Elegant and Statement</p>
-                    </div>
-                    <div className="w-1/3 absolute right-0 top-0 h-full flex items-center justify-center overflow-hidden group">
-                      <img
-                        src="/n-image/Party-Wear.png"
-                        alt="Party Jewelry"
-                        className="w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-125"
-                      />
-                    </div>
-                  </div>
+                  <img
+                    src="../images/wear-3.jpg"
+                    alt="Desktop Image"
+                    className="hidden md:block w-full shadow-lg rounded-lg mb-4"
+                  />
+
+                  {/* Mobile image */}
+                  <img
+                    src="../images/wear.m.3.jpg"
+                    alt="Mobile Image"
+                    className="block md:hidden w-full shadow-lg rounded-lg mb-4 mx-auto relative"
+                    style={{ left: "179px" }}
+                  />
+
 
                   {/* Traditional Wear */}
-                  <div className="relative bg-[#F0FFF0] rounded-lg p-6 flex items-center justify-between overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 min-h-[160px] cursor-pointer" onClick={() => navigate("/catalog-products")}>
-                    <div className="flex-1 z-10">
-                      <h3 className="text-2xl font-semibold text-[#5B3E38] mb-2">Traditional Wear</h3>
-                      <p className="text-[#855A49]">Vintage and Antique</p>
-                    </div>
-                    <div className="w-1/3 absolute right-0 top-0 h-full flex items-center justify-center overflow-hidden group">
-                      <img
-                        src="/n-image/Traditional.png"
-                        alt="Traditional Jewelry"
-                        className="w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-125"
-                      />
-                    </div>
-                  </div>
+                  <img
+                    src="../images/wear-4.jpg"
+                    alt="Desktop Image"
+                    className="hidden md:block w-full shadow-lg rounded-lg mb-4"
+                  />
+
+                  {/* Mobile image */}
+                  <img
+                    src="../images/wear.m.4.jpg"
+                    alt="Mobile Image"
+                    className="block md:hidden w-full shadow-lg rounded-lg mb-4 mx-auto relative"
+                    style={{ left: "179px" }}
+                  />
+
                 </div>
               </div>
 
@@ -634,9 +627,9 @@ const Index = () => {
                     <div className="bg-[#F0F0FF] rounded-[40px_0px_40px_0px] flex flex-col items-center justify-center text-center hover:shadow-lg transition-all duration-300">
                       <div className="w-70 h-70 overflow-hidden">
                         <img
-                          src="/n-image/Christmas.png"
+                          src="/n-image/Christmas.jpeg"
                           alt="Christmas"
-                          className="w-full h-full object-contain transition-transform duration-300  hover:scale-110"
+                          className=" Christmas w-full h-full object-contain transition-transform duration-300  hover:scale-110 relative top-12"
                         />
                       </div>
                     </div>
@@ -651,9 +644,9 @@ const Index = () => {
                     <div className="bg-[#FFE8E8] rounded-[40px_0px_40px_0px]  flex flex-col items-center justify-center text-center hover:shadow-lg transition-all duration-300">
                       <div className="w-70 h-70 overflow-hidden">
                         <img
-                          src="/n-image/Halloween.png"
+                          src="/n-image/Halloween.jpeg"
                           alt="Halloween"
-                          className="w-full h-full object-contain transition-transform duration-300 hover:scale-110"
+                          className="Halloween w-full h-[75%] object-contain transition-transform duration-300 hover:scale-110 relative top-10"
                         />
                       </div>
 
@@ -669,9 +662,9 @@ const Index = () => {
                     <div className="bg-[#E8FFE8] rounded-[40px_0px_40px_0px]  flex flex-col items-center justify-center text-center hover:shadow-lg transition-all duration-300">
                       <div className="w-70 h-70 overflow-hidden">
                         <img
-                          src="/n-image/Valentine.png"
+                          src="/n-image/Valentine.jpeg"
                           alt="Valentine's Day"
-                          className="w-full h-full object-contain transition-transform duration-300 hover:scale-110"
+                          className="Valentine w-full h-[60%] object-contain transition-transform duration-300 hover:scale-110 relative top-15"
                         />
                       </div>
 
@@ -687,9 +680,9 @@ const Index = () => {
                     <div className="bg-[#FFF8E8] rounded-[40px_0px_40px_0px]  flex flex-col items-center justify-center text-center hover:shadow-lg transition-all duration-300">
                       <div className="w-70 h-70 overflow-hidden">
                         <img
-                          src="/n-image/Daily.png"
+                          src="/n-image/Mother's Day.jpeg"
                           alt="Mother's Day"
-                          className="w-full h-full object-contain transition-transform duration-300 hover:scale-110"
+                          className="Mother w-full h-[70%] object-contain transition-transform duration-300 hover:scale-110 relative top-10"
                         />
                       </div>
 
@@ -705,9 +698,9 @@ const Index = () => {
                     <div className="bg-[#E8F8FF] rounded-[40px_0px_40px_0px]  flex flex-col items-center justify-center text-center hover:shadow-lg transition-all duration-300">
                       <div className="w-70 h-70 overflow-hidden">
                         <img
-                          src="/n-image/Birthday.png"
+                          src="/n-image/Easter Day.jpeg"
                           alt="Easter Day"
-                          className="w-full h-full object-contain transition-transform duration-300 hover:scale-110"
+                          className="Easter w-full h-[60%] object-contain transition-transform duration-300 hover:scale-110 relative top-15"
                         />
                       </div>
 
@@ -720,12 +713,12 @@ const Index = () => {
                     className="festive-occasion cursor-pointer"
                     onClick={() => navigate("/catalog-products")}
                   >
-                    <div className="bg-[#F8FFE8] rounded-[40px_0px_40px_0px]  flex flex-col items-center justify-center text-center hover:shadow-lg transition-all duration-300">
+                    <div className="bg-[#fff6f1] rounded-[40px_0px_40px_0px]  flex flex-col items-center justify-center text-center hover:shadow-lg transition-all duration-300">
                       <div className="w-70 h-70 overflow-hidden">
                         <img
-                          src="/n-image/Thanksgiving.png"
+                          src="/n-image/Thanks Giving.jpeg"
                           alt="Thanks Giving Day"
-                          className="w-full h-full object-contain transition-transform duration-300 hover:scale-110"
+                          className="Thanks w-full h-[55%] object-contain transition-transform duration-300 hover:scale-110 relative top-15"
                         />
                       </div>
 
@@ -743,7 +736,7 @@ const Index = () => {
                     className="personal-occasion cursor-pointer"
                     onClick={() => navigate("/catalog-products")}
                   >
-                    <div className="bg-white rounded-lg  flex flex-col items-center justify-center text-center shadow-md hover:shadow-lg transition-all duration-300">
+                    <div className="bg-white rounded-lg  flex flex-col items-center justify-center text-center shadow-md hover:shadow-lg transition-all duration-300 h-[208px]">
                       <div className="w-full h-40 mb-4 overflow-hidden">
                         <img
                           src="/n-image/Engagement.jpg"
@@ -897,65 +890,72 @@ const Index = () => {
               <div className="container mx-auto mt-10 mb-16">
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-6  mx-auto">
                   {/* Office Wear */}
-                  <div className="relative bg-[#F0F0FF] rounded-lg p-6 flex items-center justify-between overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 min-h-[160px] cursor-pointer" onClick={() => navigate("/catalog-products")}>
-                    <div className="flex-1 z-10">
-                      <h3 className="text-lg lg:text-2xl font-semibold text-[#5B3E38] mb-2">Dainty And Minimalist!</h3>
+                  {/* Desktop image */}
+                  <img
+                    src="../images/lok.1.jpg"
+                    alt="Desktop Image"
+                    className="hidden md:block w-full shadow-lg rounded-lg mb-4"
+                  />
 
-                    </div>
-                    <div className="w-1/3 absolute right-0 top-0 h-full flex items-center justify-center overflow-hidden group">
-                      <img
-                        src="/n-image/Office-Wear.png"
-                        alt="Office Jewelry"
-                        className="w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-125"
-                      />
-                    </div>
-                  </div>
+                  {/* Mobile image */}
+                  <img
+                    src="../images/look.1.jpg"
+                    alt="Mobile Image"
+                    className="block md:hidden w-full shadow-lg rounded-lg mb-4 mx-auto relative"
+                    style={{ left: "179px" }}
+                  />
+
 
                   {/* Daily Wear */}
-                  <div className="relative bg-[#FFF8F0] rounded-lg p-6 flex items-center justify-between overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 min-h-[160px] cursor-pointer" onClick={() => navigate("/catalog-products")}>
-                    <div className="flex-1 z-10">
-                      <h3 className="text-lg lg:text-2xl font-semibold text-[#5B3E38] mb-2">Statement And
-                        Alternative</h3>
+                   {/* Desktop image */}
+                  <img
+                    src="../images/lok.2.jpg"
+                    alt="Desktop Image"
+                    className="hidden md:block w-full shadow-lg rounded-lg mb-4"
+                  />
 
-                    </div>
-                    <div className="w-1/3 absolute right-0 top-0 h-full flex items-center justify-center overflow-hidden">
-                      <img
-                        src="/n-image/Statement.png"
-                        alt="Daily Jewelry"
-                        className="w-full h-full object-contain transform transition-transform duration-300 hover:scale-110"
-                      />
-                    </div>
-                  </div>
+                  {/* Mobile image */}
+                  <img
+                    src="../images/look.2.jpg"
+                    alt="Mobile Image"
+                    className="block md:hidden w-full shadow-lg rounded-lg mb-4 mx-auto relative"
+                    style={{ left: "179px" }}
+                  />
+
 
                   {/* Party Wear */}
-                  <div className="relative bg-[#F0F8FF] rounded-lg p-6 flex items-center justify-between overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 min-h-[160px] cursor-pointer" onClick={() => navigate("/catalog-products")}>
-                    <div className="flex-1 z-10">
-                      <h3 className="text-lg lg:text-2xl font-semibold text-[#5B3E38] mb-2">Antique and Vintage</h3>
+                  {/* Desktop image */}
+                  <img
+                    src="../images/lok.3.jpg"
+                    alt="Desktop Image"
+                    className="hidden md:block w-full shadow-lg rounded-lg mb-4"
+                  />
 
-                    </div>
-                    <div className="w-1/3 absolute right-0 top-0 h-full flex items-center justify-center overflow-hidden">
-                      <img
-                        src="/n-image/Antique.png"
-                        alt="Party Jewelry"
-                        className="w-full h-full object-contain transform transition-transform duration-300 hover:scale-110"
-                      />
-                    </div>
-                  </div>
+                  {/* Mobile image */}
+                  <img
+                    src="../images/look.3.jpg"
+                    alt="Mobile Image"
+                    className="block md:hidden w-full shadow-lg rounded-lg mb-4 mx-auto relative"
+                    style={{ left: "179px" }}
+                  />
+
 
                   {/* Traditional Wear */}
-                  <div className="relative bg-[#F0FFF0] rounded-lg p-6 flex items-center justify-between overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 min-h-[160px] cursor-pointer" onClick={() => navigate("/catalog-products")}>
-                    <div className="flex-1 z-10">
-                      <h3 className="text-lg lg:text-2xl font-semibold text-[#5B3E38] mb-2">Personalized</h3>
+                   {/* Desktop image */}
+                  <img
+                    src="../images/lok.4.jpg"
+                    alt="Desktop Image"
+                    className="hidden md:block w-full shadow-lg rounded-lg mb-4"
+                  />
 
-                    </div>
-                    <div className="w-1/3 absolute right-0 top-0 h-full flex items-center justify-center overflow-hidden">
-                      <img
-                        src="/n-image/Personalized.png"
-                        alt="Traditional Jewelry"
-                        className="w-full h-full object-contain transform transition-transform duration-300 hover:scale-110"
-                      />
-                    </div>
-                  </div>
+                  {/* Mobile image */}
+                  <img
+                    src="../images/look.4.jpg"
+                    alt="Mobile Image"
+                    className="block md:hidden w-full shadow-lg rounded-lg mb-4 mx-auto relative"
+                    style={{ left: "179px" }}
+                  />
+
                 </div>
               </div>
 
@@ -1012,7 +1012,7 @@ const Index = () => {
                   <img
                     src="/img/jewelry-design-process.jpg"
                     alt="Jewelry Design Process"
-                    className="w-full rounded-lg shadow-lg"
+                    className="pr w-full rounded-lg shadow-lg"
                   />
 
                 </div>

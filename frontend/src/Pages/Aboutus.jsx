@@ -59,7 +59,7 @@ style={{ top:"200px" }}
               Each piece is customizable and personalizable. You can add your birthstone, engravings,
               or other meaningful elements to make it truly yours.
             </p>
-            <img src={story} alt="Unique Jewelry" className="rounded-xl shadow-lg w-full mt-8" />
+            <img src={story} alt="Unique Jewelry" className="a-img rounded-xl shadow-lg w-full mt-8" />
           </div>
         </section>
 

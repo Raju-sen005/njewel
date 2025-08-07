@@ -21,8 +21,8 @@ function Header({ searchTerm, setSearchTerm }) {
     const fetchData = async () => {
         try {
             const [categoriesRes, themesRes] = await Promise.all([
-                fetch("http://localhost:8000/category/api/v1/"),
-                fetch("http://localhost:8000/theme/api/v1/")
+                fetch("http://localhost:8000/category"),
+                fetch("http://localhost:8000/theme")
             ]);
             setCategories(await categoriesRes.json());
             setThemes(await themesRes.json());
@@ -34,10 +34,10 @@ function Header({ searchTerm, setSearchTerm }) {
     const fetchCategoryDetails = async (categoryId) => {
         try {
             const [purposeRes, typeRes, themeRes, gemstoneRes] = await Promise.all([
-                fetch(`http://localhost:8000/purpose/api/v1/?categoryId=${categoryId}`),
-                fetch(`http://localhost:8000/subcategory/api/v1/?categoryId=${categoryId}`),
-                fetch(`http://localhost:8000/theme/api/v1/?categoryId=${categoryId}`),
-                fetch(`http://localhost:8000/gemstone/api/v1/?categoryId=${categoryId}`)
+                fetch(`http://localhost:8000/purpose/?categoryId=${categoryId}`),
+                fetch(`http://localhost:8000/subcategory/?categoryId=${categoryId}`),
+                fetch(`http://localhost:8000/theme/?categoryId=${categoryId}`),
+                fetch(`http://localhost:8000/gemstone/?categoryId=${categoryId}`)
             ]);
             setPurposes(await purposeRes.json());
             setTypes(await typeRes.json());
@@ -192,7 +192,7 @@ function Header({ searchTerm, setSearchTerm }) {
             {/* Header */}
             <header className="fixed top-0 left-0 right-0 bg-white z-50">
                 <section className="fixed top-0 right-0 xl:w-[1354px] mx-auto head-realative lg:px-0 md:px-10 ">
-                    <nav className="flex items-center px-10 py-4 mx-auto relative justify-between">
+                    <nav className="flex items-center px-10 py-0 mx-auto relative justify-between">
 
                         {/* Mobile Menu Button */}
                         <div className="relative lg:hidden">
@@ -430,7 +430,7 @@ function Header({ searchTerm, setSearchTerm }) {
                                                                 <li><Link to="/about-us" style={{ textDecoration: "underline" }}>About Us</Link></li>
                                                                 <li><Link to="/contact" style={{ textDecoration: "underline" }}>Contact Us</Link></li>
                                                                 <li><Link to="/blog" style={{ textDecoration: "underline" }}>Blog</Link></li>
-                                                                <li><Link to="/faq" style={{ textDecoration: "underline" }}>FAQ</Link></li>
+                                                                <li><Link to="/terms-conditions" style={{ textDecoration: "underline" }}>Terms & Conditions</Link></li>
                                                                 <li><Link to="/privacy-policy" style={{ textDecoration: "underline" }}>Privacy Policy</Link></li>
                                                             </ul>
                                                         </div>
@@ -457,7 +457,7 @@ function Header({ searchTerm, setSearchTerm }) {
                                         <Link to="/login" className="block">
                                             <div className="bg-pink-100 py-2 px-4 rounded-lg flex items-center hover:bg-pink-200 transition cursor-pointer">
                                                 <div className="flex items-center">
-                                                    <span className="mr-2 rounded-full bg-white w-16 h-16 flex items-center justify-center">
+                                                    <span className="l-box mr-2 rounded-full bg-white w-16 h-16 flex items-center justify-center">
                                                         <i className="bi text-pink-500 bi-person-fill text-3xl"></i>
                                                     </span>
                                                 </div>
@@ -502,27 +502,38 @@ function Header({ searchTerm, setSearchTerm }) {
                         </div>
                         {/* Icons */}
                         <div className="flex md:space-x-6 space-x-4 text-gray-700 text-[18px] lg:ms-6">
-                            <span className="md:hidden block">
-                                <button className='cursor-pointer text-2xl md:text-3xl' onClick={() => navigate("/search")}>
-                                    <i className="bi bi-search"></i>
-                                </button>
-                            </span>
+    {/* 🔍 Search Icon (Mobile Only) */}
+    <span className="md:hidden block">
+        <button className='cursor-pointer text-2xl md:text-3xl' onClick={() => navigate("/search")}>
+            <i className="bi bi-search"></i>
+        </button>
+    </span>
 
-                            <div className="hidden md:block">
-                                <UserProfileHover />
-                            </div>
+    {/* 👤 User Profile */}
+    <div className="hidden md:block">
+        <UserProfileHover />
+    </div>
 
-                            <span className="relative">
-                                <button className="cursor-pointer relative" onClick={() => navigate("/cart")}>
-                                    <i className="bi bi-cart3 text-2xl md:text-3xl"></i>
-                                    {cartItems?.length > 0 && (
-                                        <span className="absolute -top-2 -right-2 bg-[#AA8265] text-white text-xs px-2 py-1 rounded-full">
-                                            {cartItems.length}
-                                        </span>
-                                    )}
-                                </button>
-                            </span>
-                        </div>
+    {/* ❤️ Wishlist Icon */}
+    {/* <span>
+        <button className="cursor-pointer text-2xl md:text-3xl" onClick={() => navigate("/wishlist")}>
+            <i className="bi bi-heart"></i>
+        </button>
+    </span> */}
+
+    {/* 🛒 Cart Icon */}
+    <span className="relative">
+        <button className="cursor-pointer relative" onClick={() => navigate("/cart")}>
+            <i className="bi bi-cart3 text-2xl md:text-3xl"></i>
+            {cartItems?.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-[#AA8265] text-white text-xs px-2 py-1 rounded-full">
+                    {cartItems.length}
+                </span>
+            )}
+        </button>
+    </span>
+</div>
+
                     </nav>
 
                     {/* Desktop Nav Menu */}
